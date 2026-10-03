@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  background: #f4f6f8;
+  font-family: system-ui, sans-serif;
+  color: #1a1a1a;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.masthead {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.test-credentials {
+  background: #fff8e1;
+  border: 1px solid #ffe08a;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.test-credentials table {
+  margin-top: 0.4rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.test-credentials th {
+  text-align: left;
+  font-weight: 500;
+  color: #6b5900;
+  padding-right: 0.75rem;
+  white-space: nowrap;
+}
+
+.test-credentials td {
+  font-family: ui-monospace, monospace;
+}
+
+.shop,
+.order {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.products {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.product .price {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.product input {
+  width: 3.5rem;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+.pay-button {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #60bb46;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pay-button:disabled {
+  background: #a9d49b;
+  cursor: not-allowed;
+}
+
+.pay-button:not(:disabled):hover {
+  background: #4f9e39;
+}
+
+.status {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-paid {
+  background: #e6f6ea;
+  color: #1a7431;
+}
+
+.status-failed {
+  background: #fdecec;
+  color: #b3261e;
+}
+
+.status-cancelled {
+  background: #fff4e5;
+  color: #a35a00;
+}
+
+.order-items {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  color: #444;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #888;
+  font-size: 0.8rem;
+}

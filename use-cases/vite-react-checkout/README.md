@@ -33,7 +33,10 @@ You need Node 20 or newer.
 cd use-cases/vite-react-checkout
 npm run sdk:build
 
-# 2. Install and run
+# 2. Create your own .env from the template
+cp .env.example .env
+
+# 3. Install and run
 npm install
 npm run dev
 ```
@@ -44,7 +47,7 @@ Open **http://localhost:5173**, pick a tea, and pay. On eSewa's test page, log i
 | --- | --- | --- |
 | `9806800001` (to `…05`) | `Nepal@123` | `123456` |
 
-No `.env` is needed for this: the server falls back to eSewa's public test credentials (`EPAYTEST`). No real money moves in test mode.
+`.env` is optional for this quick start: every value in `.env.example` already defaults to eSewa's public test credentials (`EPAYTEST`) if `.env` is missing or a variable is unset, so test mode works with zero configuration. No real money moves in test mode. You only need to actually edit `.env` once you have your own merchant credentials — see [Configuration](#configuration) below for which variables become required then.
 
 `npm run dev` starts two processes: Vite on port 5173 for the React app, and Express on port 3000 for the API. Vite forwards every `/api/*` request to Express, so the browser only ever talks to `localhost:5173`.
 
@@ -201,17 +204,23 @@ The username and password come from `ESEWA_TOKEN_API_USER` and `ESEWA_TOKEN_API_
 
 ## Configuration
 
-Copy `.env.example` to `.env`. Everything is optional in test mode.
+```bash
+cp .env.example .env
+```
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `ESEWA_ENV` | `test` | `test` uses eSewa's UAT servers; `production` is live money |
-| `ESEWA_PRODUCT_CODE` | `EPAYTEST` | merchant code issued by eSewa |
-| `ESEWA_SECRET_KEY` | test key | HMAC secret issued by eSewa; required in production |
-| `APP_URL` | `http://localhost:5173` | public URL of the app; eSewa redirects customers here |
-| `PORT` | `3000` | Express port |
-| `ESEWA_TOKEN_API_USER` / `_PASSWORD` | `esewa` / `change-me` | Basic auth for the Token payment API |
-| `ESEWA_STATUS_URL` | eSewa's | point the status check at a mock server for offline testing |
+Then edit `.env`. Everything is **optional in test mode** — the server falls back to eSewa's public test credentials if a variable is missing. The variables marked below become **required** once you set `ESEWA_ENV=production`.
+
+| Variable | Default | Required in production? | Purpose |
+| --- | --- | --- | --- |
+| `ESEWA_ENV` | `test` | yes (set to `production`) | `test` uses eSewa's UAT servers; `production` is live money |
+| `ESEWA_PRODUCT_CODE` | `EPAYTEST` | **yes** | merchant code issued by eSewa |
+| `ESEWA_SECRET_KEY` | test key | **yes** | HMAC secret issued by eSewa; keep it out of the repo |
+| `APP_URL` | `http://localhost:5173` | **yes** | public HTTPS URL of the app; eSewa redirects customers here |
+| `PORT` | `3000` | no | Express port |
+| `ESEWA_TOKEN_API_USER` / `_PASSWORD` | `esewa` / `change-me` | only if you use Token payment | Basic auth for the Token payment API |
+| `ESEWA_STATUS_URL` | eSewa's | no | point the status check at a mock server for offline testing |
+
+Without real values for the **yes** rows, signatures won't match eSewa's live servers and payments will be rejected — see [Troubleshooting](#troubleshooting).
 
 ---
 
