@@ -14,12 +14,16 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Pauses here until a required reviewer approves in the Actions UI.
+    # One-time setup: repo Settings → Environments → New environment →
+    # name it "npm-publish" → add required reviewers.
+    environment: npm-publish
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
