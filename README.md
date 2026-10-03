@@ -206,6 +206,7 @@ Complete, runnable example apps live in [`use-cases/`](use-cases):
 | Example | Stack | Shows |
 | --- | --- | --- |
 | [`vite-react-checkout`](use-cases/vite-react-checkout) | Vite + React + Express | ePay v2 checkout, callback verification, status check, Token payment API |
+| [`vite-react-with-published-esewa-sdk`](use-cases/vite-react-with-published-esewa-sdk) | Vite + React + Express | Same checkout flow, installing `esewa-sdk` from npm instead of linking this repo |
 
 ---
 
@@ -242,7 +243,7 @@ Live credentials are issued by eSewa after successful test transactions.
 
 - Amounts are handled in integer paisa internally, so `0.1 + 0.2` charges total exactly `0.3`. Up to 2 decimal places are accepted.
 - Callback signatures are checked against values exactly as eSewa sent them (e.g. `"1000.0"`, `"1,000.0"`), so they verify reliably.
-- **Intent payment** (eSewa's app deeplink flow) isn't included yet; its public docs are incomplete. PRs welcome.
+- **Intent payment** (eSewa's app deeplink flow) isn't included yet; its public docs are incomplete. [PRs welcome](CONTRIBUTING.md).
 
 ## Development
 
@@ -252,6 +253,10 @@ npm test          # vitest
 npm run typecheck
 npm run build     # ESM + CJS + .d.ts into dist/
 ```
+
+## Contributing
+
+Bug reports, feature requests, and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, coding conventions, and how to submit a pull request.
 
 ## License
 
