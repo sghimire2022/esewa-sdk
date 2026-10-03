@@ -1,0 +1,36 @@
+{
+  "name": "esewa-vite-react-checkout",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Use case: an eSewa ePay v2 checkout built with Vite + React and a small Express server, using esewa-sdk.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sdk:build": "npm --prefix ../.. install && npm --prefix ../.. run build",
+    "dev": "concurrently -k -n server,web -c green,cyan \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:web": "vite",
+    "build": "vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "esewa-sdk": "file:../..",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9",
+    "vite": "^8.3.2"
+  }
+}

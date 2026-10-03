@@ -52,7 +52,8 @@ export function bytesToBase64(bytes: Uint8Array): string {
 
 /** Decodes base64 / base64url (tolerates missing padding and whitespace) to a UTF-8 string. */
 export function base64ToUtf8(input: string): string {
-  let s = input.trim().replace(/\s+/g, "").replace(/-/g, "+").replace(/_/g, "/");
+  // A literal space can only appear if a "+" was form-decoded on the way in, so restore it.
+  let s = input.trim().replace(/ /g, "+").replace(/\s+/g, "").replace(/-/g, "+").replace(/_/g, "/");
   const pad = s.length % 4;
   if (pad) s += "=".repeat(4 - pad);
   const bin = atob(s);

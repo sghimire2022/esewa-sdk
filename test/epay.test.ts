@@ -157,6 +157,33 @@ describe("EsewaEpay.verifyCallback", () => {
     expect(cb.totalAmountNormalized).toBe("1000");
   });
 
+  it("survives '+' being form-decoded into a space", async () => {
+    // Find a signed payload whose base64 actually contains "+".
+    let data = "";
+    // ("~" is 0x7E; when it lands on the last byte of a 3-byte group it encodes as "+".)
+    for (let i = 0; !data.includes("+") && i < 6; i++) {
+      const p: Record<string, string> = { ...DOC_CALLBACK, transaction_code: `${"A".repeat(i)}~~~` };
+      p.signature = await generateSignature(secretKey, p, p.signed_field_names!.split(","));
+      data = b64(p);
+    }
+    const mangled = new URLSearchParams(`data=${data}`); // unencoded "+" becomes " "
+    expect(mangled.get("data")).toContain(" ");
+    await expect(esewa.verifyCallback(mangled)).resolves.toMatchObject({ status: "COMPLETE" });
+  });
+
+  it("reports a malformed signed amount as INVALID_RESPONSE", async () => {
+    const fields = "total_amount,transaction_uuid,product_code,signed_field_names";
+    const payload: Record<string, string> = {
+      status: "COMPLETE",
+      total_amount: "10.5.0",
+      transaction_uuid: "x",
+      product_code: "EPAYTEST",
+      signed_field_names: fields,
+    };
+    payload.signature = await generateSignature(secretKey, payload, fields.split(","));
+    await expect(esewa.verifyCallback(b64(payload))).rejects.toMatchObject({ code: "INVALID_RESPONSE" });
+  });
+
   it("rejects a tampered amount", async () => {
     const data = b64({ ...DOC_CALLBACK, total_amount: "1.0" });
     await expect(esewa.verifyCallback(data)).rejects.toMatchObject({ code: "SIGNATURE_MISMATCH" });

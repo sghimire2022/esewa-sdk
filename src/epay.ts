@@ -359,11 +359,21 @@ export class EsewaEpay {
     }
 
     const totalAmount = values.total_amount ?? rawJsonValue(json, "total_amount", obj.total_amount) ?? "";
+    let totalAmountNormalized = "";
+    if (totalAmount) {
+      try {
+        totalAmountNormalized = formatAmount(totalAmount, "total_amount");
+      } catch (cause) {
+        throw new EsewaError("INVALID_RESPONSE", `Callback total_amount "${totalAmount}" is not a valid amount`, obj, {
+          cause,
+        });
+      }
+    }
     return {
       transactionCode: String(obj.transaction_code ?? ""),
       status: String(obj.status ?? ""),
       totalAmount,
-      totalAmountNormalized: totalAmount ? formatAmount(totalAmount, "total_amount") : "",
+      totalAmountNormalized,
       transactionUuid: String(obj.transaction_uuid ?? ""),
       productCode: String(obj.product_code ?? ""),
       raw: obj,

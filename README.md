@@ -199,6 +199,16 @@ app.use("/api/esewa", express.json(), toNodeHandler(esewaTokenApi));
 
 ---
 
+## Use cases
+
+Complete, runnable example apps live in [`use-cases/`](use-cases):
+
+| Example | Stack | Shows |
+| --- | --- | --- |
+| [`vite-react-checkout`](use-cases/vite-react-checkout) | Vite + React + Express | ePay v2 checkout, callback verification, status check, Token payment API |
+
+---
+
 ## Errors
 
 Everything throws `EsewaError` with a `code`:
