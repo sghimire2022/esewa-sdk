@@ -14,7 +14,7 @@ The test eSewa login (ID, password, OTP) is shown right in the app while `ESEWA_
 You need Node 20 or newer.
 
 ```bash
-cd use-cases/vite-react-minimal
+cd use-cases/vite-react-with-published-esewa-sdk
 
 # Create your own .env from the template
 cp .env.example .env
@@ -111,7 +111,7 @@ Before taking real payments:
 ## Project layout
 
 ```
-vite-react-minimal/
+vite-react-with-published-esewa-sdk/
 ├── server/
 │   ├── index.ts      All routes: config, checkout, success, failure, order status
 │   ├── esewa.ts      The one place the SDK is configured (secret key lives here)

@@ -1,8 +1,8 @@
 {
-  "name": "esewa-vite-react-minimal",
+  "name": "esewa-vite-react-with-published-esewa-sdk",
   "private": true,
   "version": "0.1.0",
-  "description": "Minimal use case: one eSewa ePay v2 payment with Vite + React and a small Express server, using the published esewa-sdk package from npm.",
+  "description": "Cart-and-checkout use case: Vite + React and a small Express server, using the published esewa-sdk package from npm (not a local build).",
   "type": "module",
   "engines": {
     "node": ">=20"
