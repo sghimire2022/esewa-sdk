@@ -256,7 +256,7 @@ npm run build     # ESM + CJS + .d.ts into dist/
 
 ## Contributing
 
-Bug reports, feature requests, and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, coding conventions, and how to submit a pull request.
+Bug reports, feature requests, and PRs are welcome on [github.com/sghimire2022/esewa-sdk](https://github.com/sghimire2022/esewa-sdk) — see [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, coding conventions, and how to submit a pull request.
 
 ## License
 
