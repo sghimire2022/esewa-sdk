@@ -143,5 +143,46 @@ The signature didn't match. Check that `ESEWA_PRODUCT_CODE` and `ESEWA_SECRET_KE
 **Order stays "Waiting for confirmation" after paying**
 Press **Ask eSewa for the status** on the order page to retry the server-to-server check.
 
+**"Login Error: Service is currently unavailable. Please try again later."**
+This appears on eSewa's own login page, after your signed form has already been submitted — it isn't something this app or the SDK can catch or retry. Before assuming it's eSewa's flaky shared UAT environment (common — every developer testing eSewa integrations shares the same few `EPAYTEST` test accounts), rule out a config mistake by calling `/api/checkout` directly and inspecting the response:
+
+```bash
+curl -s -X POST http://localhost:3000/api/checkout \
+  -H "content-type: application/json" \
+  -d '{"items":[{"productId":"pen","quantity":2},{"productId":"mug","quantity":1}]}'
+```
+
+A correct response looks like this:
+
+```json
+{
+  "esewa": {
+    "url": "https://rc-epay.esewa.com.np/api/epay/main/v2/form",
+    "fields": {
+      "amount": "430",
+      "tax_amount": "0",
+      "total_amount": "430",
+      "transaction_uuid": "FCAE7CB8-C877-4612-8194-96F2867E04E0",
+      "product_code": "EPAYTEST",
+      "product_service_charge": "0",
+      "product_delivery_charge": "0",
+      "success_url": "http://localhost:5173/api/esewa/success",
+      "failure_url": "http://localhost:5173/api/esewa/failure/FCAE7CB8-C877-4612-8194-96F2867E04E0",
+      "signed_field_names": "total_amount,transaction_uuid,product_code",
+      "signature": "Q6bJZUPKcLipLUT6wt+A8fl4pCQoXHOgGnHV3sjGmTM="
+    }
+  }
+}
+```
+
+Check your own output against it:
+
+- `product_code` must be `EPAYTEST` in test mode — not blank, not a real merchant code
+- `total_amount` = `amount` + `tax_amount` + `product_delivery_charge`
+- `signed_field_names` should be exactly `total_amount,transaction_uuid,product_code`
+- `success_url` / `failure_url` should point at your actual `APP_URL`, not something stale
+
+If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, or try a different test ID from the banner shown in the app (`9806800001` through `…05`).
+
 **"Order not found" after restarting the server**
 Orders are kept in memory in this example. Use a database in your app.

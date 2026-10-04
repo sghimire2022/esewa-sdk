@@ -288,3 +288,34 @@ The order page's trace panel shows why. `NETWORK_ERROR` means your server couldn
 
 **"Order not found" after restarting the server**
 Orders are kept in memory in this example. Use a database in your app.
+
+**"Login Error: Service is currently unavailable. Please try again later."**
+This appears on eSewa's own login page, after your signed form has already been submitted — it isn't something this app or the SDK can catch or retry. Before assuming it's eSewa's flaky shared UAT environment (common — every developer testing eSewa integrations shares the same few `EPAYTEST` test accounts), rule out a config mistake by checking the box **"Show the signed request before going to eSewa"** on the shop page. A correct request looks like this:
+
+```json
+{
+  "url": "https://rc-epay.esewa.com.np/api/epay/main/v2/form",
+  "fields": {
+    "amount": "850",
+    "tax_amount": "110.5",
+    "total_amount": "1060.5",
+    "transaction_uuid": "ILAM-261004-0F47D3AD",
+    "product_code": "EPAYTEST",
+    "product_service_charge": "0",
+    "product_delivery_charge": "100",
+    "success_url": "http://localhost:5173/api/esewa/success",
+    "failure_url": "http://localhost:5173/api/esewa/failure/ILAM-261004-0F47D3AD",
+    "signed_field_names": "total_amount,transaction_uuid,product_code",
+    "signature": "p+xDmh38zOvVXsf7WMQbMFDBgHxy07+tMTsxO6dPmvQ="
+  }
+}
+```
+
+Check your own panel against it:
+
+- `product_code` must be `EPAYTEST` in test mode — not blank, not a real merchant code
+- `total_amount` = `amount` + `tax_amount` + `product_delivery_charge`
+- `signed_field_names` should be exactly `total_amount,transaction_uuid,product_code`
+- `success_url` / `failure_url` should point at your actual `APP_URL`, not something stale
+
+If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, or try a different test ID from the table above (`9806800001` through `…05`).
