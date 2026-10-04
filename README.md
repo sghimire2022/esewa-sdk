@@ -208,6 +208,16 @@ Complete, runnable example apps live in [`use-cases/`](use-cases):
 | [`vite-react-checkout`](use-cases/vite-react-checkout) | Vite + React + Express | ePay v2 checkout, callback verification, status check, Token payment API |
 | [`vite-react-with-published-esewa-sdk`](use-cases/vite-react-with-published-esewa-sdk) | Vite + React + Express | Same checkout flow, installing `esewa-sdk` from npm instead of linking this repo |
 
+### Tested with eSewa
+
+A checkout through eSewa's test environment with test ID `9806800005`, using the published package. The [full six-step walkthrough](https://github.com/sghimire2022/esewa-sdk/tree/main/use-cases/vite-react-with-published-esewa-sdk#tested-in-esewas-test-environment) is in the use case's README.
+
+<!-- Full URLs (not relative paths) so the images also render on npmjs.com, whose package doesn't include them. They load once the files are on main. -->
+
+| Shop, with test credentials | eSewa login | Order paid |
+| --- | --- | --- |
+| ![Shop page with test-credentials banner](https://raw.githubusercontent.com/sghimire2022/esewa-sdk/main/use-cases/vite-react-with-published-esewa-sdk/docs/screenshots/01-shop.png) | ![eSewa login page](https://raw.githubusercontent.com/sghimire2022/esewa-sdk/main/use-cases/vite-react-with-published-esewa-sdk/docs/screenshots/02-esewa-login.png) | ![Order page showing paid](https://raw.githubusercontent.com/sghimire2022/esewa-sdk/main/use-cases/vite-react-with-published-esewa-sdk/docs/screenshots/05-order-paid.png) |
+
 ---
 
 ## Errors
