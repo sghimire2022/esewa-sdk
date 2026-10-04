@@ -76,7 +76,7 @@ export function TestCredentials() {
       <dl>
         <div>
           <dt>eSewa ID</dt>
-          <dd>9806800001</dd>
+          <dd>9806800005</dd>
         </div>
         <div>
           <dt>Password</dt>
