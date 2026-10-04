@@ -31,8 +31,9 @@ jobs:
       - name: Update npm
         run: npm install -g npm@latest
 
+      # package-lock.json is gitignored, so `npm ci` (which requires it) can't be used.
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Verify release tag matches package.json version
         run: |
