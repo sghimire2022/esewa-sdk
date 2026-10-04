@@ -26,6 +26,11 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
 
+      # Trusted Publishing (OIDC) needs a recent npm CLI; the one bundled
+      # with Node 22 is too old to support it yet.
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -42,7 +47,11 @@ jobs:
 
       # typecheck, test and build all run via the package's own
       # "prepublishOnly" script, so a failure here blocks the publish step.
+      #
+      # No NPM_TOKEN here: this publishes via npm Trusted Publishing (OIDC).
+      # npm exchanges this job's GitHub Actions identity token for a short-
+      # lived publish credential, so there's no long-lived secret to leak
+      # and no "stage-only" token restriction. Requires a one-time trusted
+      # publisher registration on npmjs.com (see below).
       - name: Publish
         run: npm publish --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
