@@ -60,6 +60,23 @@ See `server/index.ts` for the full route list, `server/orders.ts` for the in-mem
 
 ---
 
+## Tested in eSewa's test environment
+
+A full checkout run with test ID `9806800005`, step by step.
+
+<!-- Save screenshots in docs/screenshots/ using the file names below; they appear here automatically. -->
+
+| Step | Screenshot |
+| --- | --- |
+| 1. Shop page, with the test-credentials banner marking `9806800005` as currently working | ![Shop page with test-credentials banner](docs/screenshots/01-shop.png) |
+| 2. eSewa login page, logging in with `9806800005` / `Nepal@123` | ![eSewa login page](docs/screenshots/02-esewa-login.png) |
+| 3. OTP entry (`123456`) | ![eSewa OTP entry](docs/screenshots/03-esewa-otp.png) |
+| 4. eSewa payment confirmation | ![eSewa payment confirmation](docs/screenshots/04-esewa-confirm.png) |
+| 5. Back in the app: order marked **paid**, with eSewa's reference ID | ![Order page showing paid](docs/screenshots/05-order-paid.png) |
+| 6. Cancelled on eSewa: order marked **failed** | ![Order page showing failed](docs/screenshots/06-order-failed.png) |
+
+---
+
 ## Configuration
 
 ```bash
@@ -112,6 +129,8 @@ Before taking real payments:
 
 ```
 vite-react-with-published-esewa-sdk/
+├── docs/
+│   └── screenshots/   Images for the "Tested in eSewa's test environment" section
 ├── server/
 │   ├── index.ts      All routes: config, checkout, success, failure, order status
 │   ├── esewa.ts      The one place the SDK is configured (secret key lives here)
