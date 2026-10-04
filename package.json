@@ -13,6 +13,14 @@
   ],
   "license": "MIT",
   "author": "Suresh Ghimire",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sghimire2022/esewa-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sghimire2022/esewa-sdk/issues"
+  },
+  "homepage": "https://github.com/sghimire2022/esewa-sdk#readme",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
