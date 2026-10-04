@@ -17,6 +17,7 @@ Package name: `esewa-sdk` (free on npm as of 2026-10-03). Zero runtime deps; Web
 - Callback signature covers `signed_field_names` itself, whose value contains commas; message is a plain `k=v` join with ",".
 - Callback amounts must be re-signed exactly as sent ("1000.0", possibly "1,000.0"); SDK extracts raw JSON values for this.
 - Two different test eSewa ID sets appear in the docs: 9806800001–5 (Test credentials page) and 9711111111–4 (ePay page).
+- 9806800005 (password `Nepal@123`, OTP `123456`) confirmed working in a manual UAT checkout on 2026-10-03.
 - eSewa's success redirect appends `?data=`, so keep the success URL query-free; put order ids in the failure URL path instead.
 
 ## Changelog

@@ -8,6 +8,10 @@ import { navigate } from "./router";
 //   /             the shop and cart
 //   /orders/:id   where the server sends the customer after eSewa
 
+// The test eSewa ID last confirmed to log in on eSewa's UAT page. The banner
+// marks it as "currently working"; change it if eSewa rotates its test accounts.
+const WORKING_TEST_ID = "9806800005";
+
 export function App() {
   const [path, setPath] = useState(location.pathname);
   const [config, setConfig] = useState<Config | null>(null);
@@ -63,7 +67,20 @@ function TestCredentials({ testCredentials }: { testCredentials: Config["testCre
         <tbody>
           <tr>
             <th>eSewa ID</th>
-            <td>{testCredentials.esewaIds.join(", ")}</td>
+            <td>
+              {testCredentials.esewaIds.map((id, i) => (
+                <span key={id}>
+                  {i > 0 && ", "}
+                  {id === WORKING_TEST_ID ? (
+                    <mark className="working-id">
+                      {id} <small>currently working</small>
+                    </mark>
+                  ) : (
+                    id
+                  )}
+                </span>
+              ))}
+            </td>
           </tr>
           <tr>
             <th>Password</th>

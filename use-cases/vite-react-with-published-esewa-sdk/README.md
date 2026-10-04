@@ -182,7 +182,7 @@ Check your own output against it:
 - `signed_field_names` should be exactly `total_amount,transaction_uuid,product_code`
 - `success_url` / `failure_url` should point at your actual `APP_URL`, not something stale
 
-If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, or try a different test ID from the banner shown in the app (`9806800001` through `…05`).
+If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, or try the test ID the banner in the app marks as **currently working** (set by `WORKING_TEST_ID` in `src/App.tsx`).
 
 **"Order not found" after restarting the server**
 Orders are kept in memory in this example. Use a database in your app.

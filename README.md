@@ -232,7 +232,7 @@ Everything throws `EsewaError` with a `code`:
 | --- | --- |
 | Product code | `EPAYTEST` |
 | Secret key | `8gBm/:&EnhH.1/q` |
-| eSewa ID | `9806800001` … `9806800005` |
+| eSewa ID | `9806800005` (the constant also lists eSewa's other documented IDs, `9806800001`–`04`) |
 | Password | `Nepal@123` |
 | MPIN | `1122` |
 | OTP | `123456` |

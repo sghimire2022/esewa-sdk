@@ -45,7 +45,7 @@ Open **http://localhost:5173**, pick a tea, and pay. On eSewa's test page, log i
 
 | eSewa ID | Password | OTP |
 | --- | --- | --- |
-| `9806800001` (to `…05`) | `Nepal@123` | `123456` |
+| `9806800005` | `Nepal@123` | `123456` |
 
 `.env` is optional for this quick start: every value in `.env.example` already defaults to eSewa's public test credentials (`EPAYTEST`) if `.env` is missing or a variable is unset, so test mode works with zero configuration. No real money moves in test mode. You only need to actually edit `.env` once you have your own merchant credentials — see [Configuration](#configuration) below for which variables become required then.
 
@@ -318,4 +318,4 @@ Check your own panel against it:
 - `signed_field_names` should be exactly `total_amount,transaction_uuid,product_code`
 - `success_url` / `failure_url` should point at your actual `APP_URL`, not something stale
 
-If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, or try a different test ID from the table above (`9806800001` through `…05`).
+If all of that checks out, the request is correct and the error is on eSewa's side — retry in a few minutes, and make sure you logged in with the test ID from the table above (`9806800005`).
