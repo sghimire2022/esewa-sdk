@@ -1,6 +1,6 @@
 {
   "name": "esewa-sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Unofficial, type-safe TypeScript SDK for the eSewa payment gateway (ePay v2 and Token payment). Zero dependencies, runs on Node 18+, Bun, Deno and edge runtimes.",
   "keywords": [
     "esewa",
